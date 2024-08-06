@@ -6,46 +6,45 @@ const reset = document.querySelector(".reset");
 let minutes = document.getElementById("minutes");
 let seconds = document.getElementById("seconds");
 
-let startTimer = null;
+let intervalId = null;
 
 function timer() {
   if (minutes.value == 0 && seconds.value == 0) {
     minutes.value = null;
     seconds.value = null;
-  } else if (seconds.value != 0) {
+  } else if (seconds.value > 0) {
     seconds.value--;
   } else if (minutes.value != 0 && seconds.value == 0) {
     seconds.value = 59;
     minutes.value--;
   }
+  if (minutes.value < 10 || seconds.value < 10) {
+    minutes.value = minutes.value.toString().padStart("2", 0);
+    seconds.value = seconds.value.toString().padStart("2", 0);
+  }
+}
+
+function startTimer() {
+  if (intervalId) return;
 }
 
 function stopTimer() {
-  clearInterval(startTimer);
+  clearInterval(intervalId);
 }
 
 start.addEventListener("click", function () {
-  function startInterval() {
-    startTimer = setInterval(function () {
-      timer();
-    }, 1000);
-  }
-  startInterval();
+  startTimer();
+  intervalId = setInterval(timer, 1000);
 });
 
 pause.addEventListener("click", function () {
-  if ((timer = true)) {
-    timer = false;
-    pause.textContent = `Resume`;
-  }
-});
-
-resume.addEventListener("click", function () {
-  startTimer;
+  stopTimer();
+  startTimer();
 });
 
 reset.addEventListener("click", function () {
   minutes.value = null;
   seconds.value = null;
   stopTimer();
+  startTimer();
 });

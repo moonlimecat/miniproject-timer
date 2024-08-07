@@ -10,10 +10,17 @@
   </head>
   <body>
     <div class="container">
+      
       <div class="timer">
-        <input type="number" max="60" min="00" id="minutes" placeholder="00"></input>
-        <span>:</span>
-        <input type="number" max="60" min="00" id="seconds" placeholder="00"></input>
+        <div class="tags">
+          <span id="mintag">Minutes</span>
+          <span id="sectag">Seconds</span>
+        </div>
+        <div class="times">
+          <input type="number" max="60" min="00" id="minutes" placeholder="00" oninput="inputLenFunc()"></input>
+          <span>:</span>
+          <input type="number" max="60" min="00" id="seconds" placeholder="00" oninput="inputLenFunc()"></input>
+        </div>
       </div>
       <div class="btns">
         <button class="start">Start</button>
